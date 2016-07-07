@@ -34,3 +34,9 @@ set number
 
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
+
+" Display unprintable characters. 
+set list
+
+" Make tabs, trailing whitespace, and EOL charaters easy to spot
+set listchars=tab:▸\ ,trail:·,eol:¬
