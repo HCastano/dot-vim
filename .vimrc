@@ -35,7 +35,7 @@ set number
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
 
-" Display unprintable characters. 
+" Display unprintable characters.
 set list
 
 " Make tabs, trailing whitespace, and EOL charaters easy to spot
@@ -47,5 +47,8 @@ set nowrap
 "Wrap lines when convenient. Doesn't affect text, only display
 set linebreak
 
-"Make all lines 79 characters or less 
+"Make all lines 79 characters or less
 set textwidth=79
+
+" Minimal number of screen lines to keep above and below the cursor
+set scrolloff=8
