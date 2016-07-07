@@ -40,3 +40,12 @@ set list
 
 " Make tabs, trailing whitespace, and EOL charaters easy to spot
 set listchars=tab:▸\ ,trail:·,eol:¬
+
+" Don't wrap lines
+set nowrap
+
+"Wrap lines when convenient. Doesn't affect text, only display
+set linebreak
+
+"Make all lines 79 characters or less 
+set textwidth=79
