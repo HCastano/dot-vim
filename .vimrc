@@ -32,6 +32,9 @@ filetype plugin indent on
 " Show line numbers
 set number
 
+" Show cursor position
+set ruler
+
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
 
