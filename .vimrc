@@ -29,6 +29,15 @@ colorscheme dracula
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
 
+" Make tab characters appear two spaces wide 
+set tabstop=2
+
+" Make an indent correspond to a single tab
+set shiftwidth=2
+
+" Make tab key insert spaces instead of tab characters 
+set expandtab
+
 " Show line numbers
 set number
 
