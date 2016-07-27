@@ -23,8 +23,8 @@ set backspace=indent,eol,start
 " Switch syntax highlighting on
 syntax enable 
 
-" Use the monokai colour scheme
-colorscheme monokai
+" Use the dracula colour scheme
+colorscheme dracula
 
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
