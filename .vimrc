@@ -1,17 +1,15 @@
-" A minimal vimrc for new vim users to start with.
-"
 " Referenced here: http://vimuniversity.com/samples/your-first-vimrc-should-be-nearly-empty
 "
 " Original Author:	     Bram Moolenaar <Bram@vim.org>
 " Made more minimal by:  Ben Orenstein
-" Modified by :          Ben McCormick
-" Last change:	         2014 June 8
+" Modified by :          Hernando Castano, Ben McCormick
+" Last change:	         2016 July 29
 "
 " To use it, copy it to
 "  for Unix based systems (including OSX and Linux):  ~/.vimrc
 "  for Windows :  $VIM\_vimrc
 "
-"  If you don't understand a setting in here, just type ':h setting'.
+" If you don't understand a setting in here, just type ':h setting'.
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
