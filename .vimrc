@@ -62,3 +62,6 @@ set textwidth=79
 
 " Minimal number of screen lines to keep above and below the cursor
 set scrolloff=8
+
+" Set Markdown syntax highlighting for *.md files
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
