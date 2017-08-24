@@ -11,6 +11,9 @@
 "
 " If you don't understand a setting in here, just type ':h setting'.
 
+" Configure Pathogen
+execute pathogen#infect()
+
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -22,7 +25,7 @@ set backspace=indent,eol,start
 syntax enable 
 
 " Use the dracula colour scheme
-colorscheme dracula
+" colorscheme dracula
 
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
