@@ -74,3 +74,16 @@ inoremap jk <esc>
 
 " Stay away from bad habits
 inoremap <esc> <nop>
+
+" Need this to get Syntastic to play nice
+let shell="/bin/zsh -i"
+
+" Recommended Syntastic defaults
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
