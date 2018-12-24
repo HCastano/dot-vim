@@ -22,7 +22,7 @@ set nocompatible
 set backspace=indent,eol,start
 
 " Switch syntax highlighting on
-syntax enable 
+syntax enable
 
 " Use the dracula colour scheme
 " colorscheme dracula
@@ -30,13 +30,13 @@ syntax enable
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
 
-" Make tab characters appear two spaces wide 
+" Make tab characters appear two spaces wide
 set tabstop=2
 
 " Make an indent correspond to a single tab
 set shiftwidth=2
 
-" Make tab key insert spaces instead of tab characters 
+" Make tab key insert spaces instead of tab characters
 set expandtab
 
 " Show line numbers
@@ -91,3 +91,14 @@ let g:syntastic_check_on_wq = 0
 " Fix for leading ^G characters in NERDTree
 " See: https://old.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
 let g:NERDTreeNodeDelimiter = "\u00a0"
+
+" Remove trailing whitespaces on save while keeping current cursor position
+" https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
