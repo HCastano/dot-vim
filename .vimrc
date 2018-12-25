@@ -96,6 +96,9 @@ let g:syntastic_check_on_wq = 0
 " See: https://old.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
 let g:NERDTreeNodeDelimiter = "\u00a0"
 
+" Key shortcut for opening NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
 " Remove trailing whitespaces on save while keeping current cursor position
 " https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
 fun! <SID>StripTrailingWhitespaces()
