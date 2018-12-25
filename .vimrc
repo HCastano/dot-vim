@@ -39,8 +39,12 @@ set shiftwidth=2
 " Make tab key insert spaces instead of tab characters
 set expandtab
 
-" Show line numbers
+" Show line hybrid numbers
 set number
+set relativenumber
+
+" Change colour of non-current line numbers to gray
+highlight LineNr ctermfg=grey
 
 " Show cursor position
 set ruler
