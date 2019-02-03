@@ -18,6 +18,10 @@ execute pathogen#infect()
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" List of plugins to disable
+" let g:pathogen_disabled = ['syntastic']
+" let g:pathogen_blacklist = ['syntastic']
+
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
@@ -30,11 +34,18 @@ syntax enable
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
 
-" Make tab characters appear two spaces wide
-set tabstop=2
+" Make tab characters appear eight spaces wide
+" Want to keep this at 4 for width concerns
+set tabstop=4
 
-" Make an indent correspond to a single tab
-set shiftwidth=2
+" Make an indent ('>>' or '<<') correspond to a single tab
+set shiftwidth=4
+
+" Control the number of columns vim uses when tab is hit
+set softtabstop=4
+
+" Make tab key insert tabs instead of spaces
+set noexpandtab
 
 " Make tab key insert spaces instead of tab characters
 set expandtab
@@ -91,6 +102,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:rust_recommended_style = 0
 
 " Fix for leading ^G characters in NERDTree
 " See: https://old.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
@@ -98,6 +110,9 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " Key shortcut for opening NERDTree
 map <C-n> :NERDTreeToggle<CR>
+
+" Show hidden files in NERDTree
+let NERDTreeShowHidden=1
 
 " Remove trailing whitespaces on save while keeping current cursor position
 " https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
@@ -109,3 +124,6 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" Remap the GoTo command for YouCompleteMe
+nnoremap ,jd :YcmCompleter GoTo<CR>
