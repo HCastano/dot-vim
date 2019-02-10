@@ -18,10 +18,6 @@ execute pathogen#infect()
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" List of plugins to disable
-" let g:pathogen_disabled = ['syntastic']
-" let g:pathogen_blacklist = ['syntastic']
-
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
@@ -93,17 +89,6 @@ inoremap <esc> <nop>
 " Need this to get Syntastic to play nice
 let shell="/bin/zsh -i"
 
-" Recommended Syntastic defaults
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:rust_recommended_style = 0
-
 " Fix for leading ^G characters in NERDTree
 " See: https://old.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
 let g:NERDTreeNodeDelimiter = "\u00a0"
@@ -125,5 +110,25 @@ endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-" Remap the GoTo command for YouCompleteMe
-nnoremap ,jd :YcmCompleter GoTo<CR>
+" Auto Completion Engine
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+
+" Tab to select
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+" Language Server Integration
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ }
+
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> ,jd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" Vim Gutter Settings
+" Quicker update time (default is 4s)
+set updatetime=250
