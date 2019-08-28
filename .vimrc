@@ -15,6 +15,9 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
 call plug#end()
 
 " Make backspace behave in a sane manner.
@@ -88,16 +91,12 @@ inoremap <esc> <nop>
 noremap <C-l> gt
 noremap <C-h> gT
 
-" " Fix for leading ^G characters in NERDTree
-" " See: https://old.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
-" let g:NERDTreeNodeDelimiter = "\u00a0"
-"
-" " Key shortcut for opening NERDTree
-" map <C-n> :NERDTreeToggle<CR>
-"
-" " Show hidden files in NERDTree
-" let NERDTreeShowHidden=1
-"
+" Key shortcut for opening NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" Show hidden files in NERDTree
+let NERDTreeShowHidden=1
+
 " " Remove trailing whitespaces on save while keeping current cursor position
 " " https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
 " fun! <SID>StripTrailingWhitespaces()
