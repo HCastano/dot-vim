@@ -1,5 +1,5 @@
-" Configure Pathogen
-execute pathogen#infect()
+" Need this to get Syntastic to play nice
+let shell="/bin/zsh -i"
 
 " Remap the leader character
 let mapleader = ","
@@ -7,6 +7,15 @@ let mapleader = ","
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
+
+" Configure Vim-Plug
+call plug#begin('~/.vim/plugged')
+
+Plug 'airblade/vim-rooter'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
 
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
@@ -79,73 +88,63 @@ inoremap <esc> <nop>
 noremap <C-l> gt
 noremap <C-h> gT
 
-" Need this to get Syntastic to play nice
-let shell="/bin/zsh -i"
+" " Fix for leading ^G characters in NERDTree
+" " See: https://old.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
+" let g:NERDTreeNodeDelimiter = "\u00a0"
+"
+" " Key shortcut for opening NERDTree
+" map <C-n> :NERDTreeToggle<CR>
+"
+" " Show hidden files in NERDTree
+" let NERDTreeShowHidden=1
+"
+" " Remove trailing whitespaces on save while keeping current cursor position
+" " https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
+" fun! <SID>StripTrailingWhitespaces()
+"     let l = line(".")
+"     let c = col(".")
+"     %s/\s\+$//e
+"     call cursor(l, c)
+" endfun
+"
+" autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+"
+" " Auto Completion Engine
+" autocmd BufEnter * call ncm2#enable_for_buffer()
+" set completeopt=noinsert,menuone,noselect
+"
+" " Tab to select
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+"
+" " Language Server Integration
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"     \ }
+"
+" let g:LanguageClient_autoStart = 1
+"
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> ,jd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"
+" let g:ale_linters = {'rust': ['rls']}
+"
+" " Vim Gutter Settings
+" " Quicker update time (default is 4s)
+" set updatetime=250
+"
 
-" Fix for leading ^G characters in NERDTree
-" See: https://old.reddit.com/r/vim/comments/a4yzyt/g_characters_prefixing_directory_and_file_names/
-let g:NERDTreeNodeDelimiter = "\u00a0"
-
-" Key shortcut for opening NERDTree
-map <C-n> :NERDTreeToggle<CR>
-
-" Show hidden files in NERDTree
-let NERDTreeShowHidden=1
-
-" Remove trailing whitespaces on save while keeping current cursor position
-" https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
-fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
-" Auto Completion Engine
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-
-" Tab to select
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-
-" Language Server Integration
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ }
-
-let g:LanguageClient_autoStart = 1
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> ,jd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-let g:ale_linters = {'rust': ['rls']}
-
-" Vim Gutter Settings
-" Quicker update time (default is 4s)
-set updatetime=250
-
-" Fuzzy Finding
-set rtp+=/usr/local/opt/fzf
-
-" Better search binding
+" " Better search binding
 noremap <leader>s :Rg<CR>
 noremap <leader>sf :Files<CR>
-
+"
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-" Default fzf layout
-" - down / up / left / right
-let g:fzf_layout = { 'down': '~40%' }
-
-" In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
-let g:fzf_layout = { 'window': '10split enew' }
+" Fzf Layout
+" let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': '12split enew' }
