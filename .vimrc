@@ -15,8 +15,9 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -126,8 +127,32 @@ let NERDTreeShowHidden=1
 " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 " nnoremap <silent> ,jd :call LanguageClient_textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-"
-" let g:ale_linters = {'rust': ['rls']}
+
+" Linter Settings
+
+" Only Lint on Save
+let g:ale_lint_on_text_changed = 'never'
+
+" Use Rust Language Server
+let g:ale_linters = {'rust': ['rls']}
+
+" Use `cargo check` instead of `cargo build`
+let g:ale_rust_cargo_use_check = 1
+
+" Config options can be found here: https://github.com/rust-lang/rls
+let g:ale_rust_rls_config = {
+	\ 'rust': {
+		\ 'build_on_save': 1,
+	\ }
+	\ }
+
+" let g:ale_sign_error = "✖"
+let g:ale_sign_warning = "⚠"
+let g:ale_sign_info = "i"
+let g:ale_sign_hint = "➤"
+
+nnoremap <silent> K :ALEHover<CR>
+nnoremap <silent> gd :ALEGoToDefinition<CR>
 "
 " " Vim Gutter Settings
 " " Quicker update time (default is 4s)
