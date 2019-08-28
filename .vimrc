@@ -1,18 +1,8 @@
-" Referenced here: http://vimuniversity.com/samples/your-first-vimrc-should-be-nearly-empty
-"
-" Original Author:	     Bram Moolenaar <Bram@vim.org>
-" Made more minimal by:  Ben Orenstein
-" Modified by :          Hernando Castano, Ben McCormick
-" Last change:	         2016 July 29
-"
-" To use it, copy it to
-"  for Unix based systems (including OSX and Linux):  ~/.vimrc
-"  for Windows :  $VIM\_vimrc
-"
-" If you don't understand a setting in here, just type ':h setting'.
-
 " Configure Pathogen
 execute pathogen#infect()
+
+" Remap the leader character
+let mapleader = ","
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -86,6 +76,9 @@ inoremap jk <esc>
 " Stay away from bad habits
 inoremap <esc> <nop>
 
+noremap <C-l> gt
+noremap <C-h> gT
+
 " Need this to get Syntastic to play nice
 let shell="/bin/zsh -i"
 
@@ -129,6 +122,30 @@ nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> ,jd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
+let g:ale_linters = {'rust': ['rls']}
+
 " Vim Gutter Settings
 " Quicker update time (default is 4s)
 set updatetime=250
+
+" Fuzzy Finding
+set rtp+=/usr/local/opt/fzf
+
+" Better search binding
+noremap <leader>s :Rg<CR>
+noremap <leader>sf :Files<CR>
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': '10split enew' }
