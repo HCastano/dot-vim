@@ -19,6 +19,12 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 Plug 'dense-analysis/ale'
 
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-bufword'
+
 call plug#end()
 
 " Make backspace behave in a sane manner.
@@ -109,13 +115,13 @@ let NERDTreeShowHidden=1
 "
 " autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 "
-" " Auto Completion Engine
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-" set completeopt=noinsert,menuone,noselect
+" Auto Completion Engine
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
 "
-" " Tab to select
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" Tab to select
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 "
 " " Language Server Integration
 " let g:LanguageClient_serverCommands = {
