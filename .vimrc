@@ -27,6 +27,8 @@ Plug 'ncm2/ncm2-bufword'
 
 Plug 'rust-lang/rust.vim'
 
+Plug 'machakann/vim-highlightedyank'
+
 call plug#end()
 
 " Make backspace behave in a sane manner.
