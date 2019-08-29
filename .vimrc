@@ -11,6 +11,7 @@ set nocompatible
 " Configure Vim-Plug
 call plug#begin('~/.vim/plugged')
 
+Plug 'itchyny/lightline.vim'
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'airblade/vim-rooter'
