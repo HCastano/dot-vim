@@ -25,6 +25,8 @@ Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-bufword'
 
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
 
 " Make backspace behave in a sane manner.
@@ -152,7 +154,7 @@ let g:ale_rust_rls_config = {
 	\ }
 	\ }
 
-" let g:ale_sign_error = "✖"
+let g:ale_sign_error = "✖"
 let g:ale_sign_warning = "⚠"
 let g:ale_sign_info = "i"
 let g:ale_sign_hint = "➤"
