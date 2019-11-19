@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-fugitive'
 
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -93,6 +94,14 @@ set textwidth=79
 " Minimal number of screen lines to keep above and below the cursor
 set scrolloff=8
 
+" Permanent undo
+set undodir=~/.vimdid
+set undofile
+
+set mouse=a " Enable mouse usage (all modes) in terminals
+
+" au Filetype rust set colorcolumn=80
+
 " Set Markdown syntax highlighting for *.md files
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
@@ -153,6 +162,8 @@ let g:ale_sign_warning = "⚠"
 let g:ale_sign_info = "i"
 let g:ale_sign_hint = "➤"
 
+let g:ale_completion_enabled = 1
+
 nnoremap <silent> K :ALEHover<CR>
 nnoremap <silent> gd :ALEGoToDefinition<CR>
 "
@@ -164,6 +175,7 @@ nnoremap <silent> gd :ALEGoToDefinition<CR>
 " " Better search binding
 noremap <leader>s :Rg<CR>
 noremap <leader>sf :Files<CR>
+noremap <leader>b :Buffers<CR>
 "
 " This is the default extra key bindings
 let g:fzf_action = {
@@ -174,3 +186,19 @@ let g:fzf_action = {
 " Fzf Layout
 " let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_layout = { 'window': '12split enew' }
+
+" https://codeyarns.com/2017/10/25/how-to-show-full-file-path-in-lightline/
+" Replace filename component of Lightline statusline
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'FilenameForLightline',
+      \ }
+      \ }
+
+" Show full path of filename
+function! FilenameForLightline()
+    return expand('%')
+endfunction
+
+" <leader><leader> toggles between buffers
+nnoremap <leader><leader> <c-^>
