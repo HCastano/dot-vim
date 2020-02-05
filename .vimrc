@@ -89,7 +89,7 @@ set nowrap
 set linebreak
 
 "Make all lines 79 characters or less
-set textwidth=79
+set textwidth=89
 
 " Minimal number of screen lines to keep above and below the cursor
 set scrolloff=8
@@ -145,7 +145,11 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 let g:ale_lint_on_text_changed = 'never'
 
 " Use Rust Language Server
-let g:ale_linters = {'rust': ['rls']}
+let g:ale_linters = {
+    \ 'rust': ['rls'],
+    \ 'c': ['clang', 'ccls'],
+    \ 'cpp': ['clang', 'ccls'],
+    \ }
 
 " Use `cargo check` instead of `cargo build`
 let g:ale_rust_cargo_use_check = 1
