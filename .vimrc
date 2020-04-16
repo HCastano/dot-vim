@@ -33,6 +33,8 @@ Plug 'rust-lang/rust.vim'
 
 Plug 'machakann/vim-highlightedyank'
 
+Plug 'vimwiki/vimwiki'
+
 call plug#end()
 
 " Make backspace behave in a sane manner.
@@ -206,3 +208,5 @@ endfunction
 
 " <leader><leader> toggles between buffers
 nnoremap <leader><leader> <c-^>
+
+let g:vimwiki_list = [{'path': '~/.vimwiki'}]
