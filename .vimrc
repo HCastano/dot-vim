@@ -2,7 +2,7 @@
 let shell="/bin/zsh -i"
 
 " Remap the leader character
-let mapleader = ","
+let mapleader = "\<Space>"
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -110,9 +110,15 @@ au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 " Remap the escape key to jk
 inoremap jk <esc>
+inoremap kj <esc>
+vnoremap jk <esc>
+vnoremap kj <esc>
 
 " Stay away from bad habits
 inoremap <esc> <nop>
+
+" Quick-save
+nmap <leader>w :w<CR>
 
 noremap <C-l> gt
 noremap <C-h> gT
@@ -125,6 +131,10 @@ nnoremap <silent> * *zz
 " Ctrl+h to stop searching
 vnoremap <C-h> :noh<cr>
 nnoremap <C-h> :noh<cr>
+
+" Copy to system clipboard
+vnoremap Y "+y
+nnoremap Y "+yy
 
 " Key shortcut for opening NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -140,8 +150,54 @@ set completeopt=noinsert,menuone,noselect
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
+" Searching
+
+" " Vim Gutter Settings
+" " Quicker update time (default is 4s)
+" set updatetime=250
+"
+
+" " Better search binding
+noremap <leader>s :Rg<CR>
+noremap <leader>f :Files<CR>
+noremap <leader>b :Buffers<CR>
+"
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Fzf Layout
+" let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': '12split enew' }
+
+" https://codeyarns.com/2017/10/25/how-to-show-full-file-path-in-lightline/
+" Replace filename component of Lightline statusline
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'FilenameForLightline',
+      \ }
+      \ }
+
+" Show full path of filename
+function! FilenameForLightline()
+    return expand('%')
+endfunction
+
+" <leader><leader> toggles between buffers
+nnoremap <leader><leader> <c-^>
+
+let g:vimwiki_list = [{'path': '~/.vimwiki', 'template_path': '~/.vimwiki/templates/',
+          \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
+          \ 'path_html': '~/.vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
+          \ 'html_filename_parameterization': 1,
+          \ 'template_ext': '.tpl'}]
+
 " CoC Settings
-" Most of these are defaults from https://github.com/neoclide/coc.nvim
+" 
+" This is a pretty long section, but most of these settings/config options
+" are defaults from from https://github.com/neoclide/coc.nvim
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -203,49 +259,11 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
 " NOTE: There's more stuff in the suggested starter file, but
 " I think these settings are fine to start off with
-
-" Searching
-
-" " Vim Gutter Settings
-" " Quicker update time (default is 4s)
-" set updatetime=250
-"
-
-" " Better search binding
-noremap <leader>s :Rg<CR>
-noremap <leader>sf :Files<CR>
-noremap <leader>b :Buffers<CR>
-"
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Fzf Layout
-" let g:fzf_layout = { 'down': '~40%' }
-let g:fzf_layout = { 'window': '12split enew' }
-
-" https://codeyarns.com/2017/10/25/how-to-show-full-file-path-in-lightline/
-" Replace filename component of Lightline statusline
-let g:lightline = {
-      \ 'component_function': {
-      \   'filename': 'FilenameForLightline',
-      \ }
-      \ }
-
-" Show full path of filename
-function! FilenameForLightline()
-    return expand('%')
-endfunction
-
-" <leader><leader> toggles between buffers
-nnoremap <leader><leader> <c-^>
-
-let g:vimwiki_list = [{'path': '~/.vimwiki', 'template_path': '~/.vimwiki/templates/',
-          \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
-          \ 'path_html': '~/.vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
-          \ 'html_filename_parameterization': 1,
-          \ 'template_ext': '.tpl'}]
