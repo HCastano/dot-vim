@@ -110,9 +110,7 @@ au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 " Remap the escape key to jk
 inoremap jk <esc>
-inoremap kj <esc>
 vnoremap jk <esc>
-vnoremap kj <esc>
 
 " Stay away from bad habits
 inoremap <esc> <nop>
@@ -193,6 +191,10 @@ let g:vimwiki_list = [{'path': '~/.vimwiki', 'template_path': '~/.vimwiki/templa
           \ 'path_html': '~/.vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
           \ 'html_filename_parameterization': 1,
           \ 'template_ext': '.tpl'}]
+
+
+" If there's a `rustfmt.toml` file present, format code on save
+let g:rustfmt_autosave_if_config_present=1
 
 " CoC Settings
 " 
