@@ -21,7 +21,6 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'ncm2/ncm2'
@@ -72,6 +71,9 @@ set relativenumber
 
 " Change colour of non-current line numbers to gray
 highlight LineNr ctermfg=grey
+
+" Make colour of Popup menu text and background more legible
+highlight Pmenu ctermfg=White ctermbg=Black guibg=DarkGrey
 
 " Show cursor position
 set ruler
@@ -170,15 +172,24 @@ let g:fzf_action = {
 " let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_layout = { 'window': '12split enew' }
 
-" https://codeyarns.com/2017/10/25/how-to-show-full-file-path-in-lightline/
-" Replace filename component of Lightline statusline
+let $FZF_DEFAULT_COMMAND='fd --type f --hidden'
+
+" Key thing to note here is the `cocstatus` usage, which allows us to see what's
+" happening with Coc (which in turn shows us what's going on with `rust-analyzer`)
 let g:lightline = {
-      \ 'component_function': {
-      \   'filename': 'FilenameForLightline',
-      \ }
-      \ }
+  \ 'colorscheme': 'wombat',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'cocstatus': 'coc#status',
+  \   'filename': 'FilenameForLightline',
+  \ },
+  \ }
 
 " Show full path of filename
+" https://codeyarns.com/2017/10/25/how-to-show-full-file-path-in-lightline/
 function! FilenameForLightline()
     return expand('%')
 endfunction
@@ -193,8 +204,22 @@ let g:vimwiki_list = [{'path': '~/.vimwiki', 'template_path': '~/.vimwiki/templa
           \ 'template_ext': '.tpl'}]
 
 
-" If there's a `rustfmt.toml` file present, format code on save
 let g:rustfmt_autosave_if_config_present=1
+
+" Rust Analyzer Keybindings
+
+" Explain the error under the cursor
+nnoremap <space>re :CocCommand rust-analyzer.explainError<cr>
+
+" Open the Docs under the cursor in the browser
+nnoremap <space>rk :CocCommand rust-analyzer.openDocs<cr>
+
+" Turn inlay hints on and off
+nnoremap <space>rh :CocCommand rust-analyzer.toggleInlayHints<cr>
+
+
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 " CoC Settings
 " 
@@ -266,6 +291,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+
+" Show actions available at this location
+nnoremap <silent> <space>a  :CocAction<cr>
 
 " NOTE: There's more stuff in the suggested starter file, but
 " I think these settings are fine to start off with
