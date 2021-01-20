@@ -112,7 +112,6 @@ au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 " Remap the escape key to jk
 inoremap jk <esc>
-vnoremap jk <esc>
 
 " Stay away from bad habits
 inoremap <esc> <nop>
