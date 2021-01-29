@@ -156,17 +156,43 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
 " Searching
 
-" " Vim Gutter Settings
-" " Quicker update time (default is 4s)
-" set updatetime=250
+" Bindings for FZF-Preview Plugin
 "
-
-" Better search binding
-noremap <leader>s :Rg<CR>
-noremap <leader>f :Files<CR>
-noremap <leader>b :Buffers<CR>
-
+" Note: This is currently installed as a Coc Plugin.
+" Install with: `:CocInstall coc-fzf-preview`
 "
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
+
+" Have a sane default if I don't press anything after [fzf-p]
+nnoremap <silent> [fzf-p]      :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+
+" Now for the useful bindings
+nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+
+" Searching with '.' as argument so we can open the search box without any arguments
+nnoremap          [fzf-p]s    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>.<CR>
+xnoremap          [fzf-p]s    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+
+nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+
+nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
+
+nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+
+nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+
+nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+
+nnoremap <silent> [fzf-p]e     :<C-u>CocCommand fzf-preview.CocDiagnostics<CR>
+
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
