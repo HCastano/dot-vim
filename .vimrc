@@ -37,6 +37,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'merlinrebrovic/focus.vim'
 Plug 'unblevable/quick-scope'
 
+Plug 'luochen1990/rainbow'
+
 call plug#end()
 
 " Make backspace behave in a sane manner.
@@ -236,6 +238,12 @@ let g:vimwiki_list = [{'path': '~/.vimwiki', 'template_path': '~/.vimwiki/templa
 
 
 let g:rustfmt_autosave_if_config_present=1
+
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold', 'start=/</ end=/>/ fold'],
+\}
+
 
 " Rust Analyzer Keybindings
 
