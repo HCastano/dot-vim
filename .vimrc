@@ -19,8 +19,6 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'ncm2/ncm2'
@@ -34,6 +32,10 @@ Plug 'rust-lang/rust.vim'
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'vimwiki/vimwiki'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+Plug 'merlinrebrovic/focus.vim'
+Plug 'unblevable/quick-scope'
 
 call plug#end()
 
@@ -127,19 +129,22 @@ nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 
-" Ctrl+h to stop searching
-vnoremap <C-h> :noh<cr>
-nnoremap <C-h> :noh<cr>
+" Ctrl+n to stop highlighting search results
+vnoremap <C-n> :noh<cr>
+nnoremap <C-n> :noh<cr>
 
 " Copy to system clipboard
-vnoremap Y "+y
-nnoremap Y "+yy
+set clipboard+=unnamedplus
 
-" Key shortcut for opening NERDTree
-map <C-n> :NERDTreeToggle<CR>
+" Make moving between windows a bit easier
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
-" Show hidden files in NERDTree
-let NERDTreeShowHidden=1
+" When opening new windows set the cursor on the more natural window
+set splitbelow
+set splitright
 
 " Auto Completion Engine
 autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -156,10 +161,11 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 " set updatetime=250
 "
 
-" " Better search binding
+" Better search binding
 noremap <leader>s :Rg<CR>
 noremap <leader>f :Files<CR>
 noremap <leader>b :Buffers<CR>
+
 "
 " This is the default extra key bindings
 let g:fzf_action = {
@@ -216,12 +222,11 @@ nnoremap <space>rk :CocCommand rust-analyzer.openDocs<cr>
 " Turn inlay hints on and off
 nnoremap <space>rh :CocCommand rust-analyzer.toggleInlayHints<cr>
 
-
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 " CoC Settings
-" 
+"
 " This is a pretty long section, but most of these settings/config options
 " are defaults from from https://github.com/neoclide/coc.nvim
 
