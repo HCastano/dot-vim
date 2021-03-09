@@ -192,6 +192,7 @@ nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=
 nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
 nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+nnoremap <silent> [fzf-p]h     :<C-u>CocCommand fzf-preview.CommandPalette<CR>
 
 nnoremap <silent> [fzf-p]e     :<C-u>CocCommand fzf-preview.CocDiagnostics<CR>
 
