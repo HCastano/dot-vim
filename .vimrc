@@ -156,6 +156,14 @@ set completeopt=noinsert,menuone,noselect
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
+" Vim-Fugitive Bindings
+nmap <Leader>gst :Git<CR>
+nmap <Leader>gc :Git commit<CR>
+nmap <Leader>gd :Gvdiffsplit<CR>
+
+" Find out who I need to yell at
+nmap <Leader>gb :Git blame<CR>
+
 " Searching
 
 " Bindings for FZF-Preview Plugin
