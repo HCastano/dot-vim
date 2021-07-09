@@ -131,8 +131,8 @@ inoremap jk <esc>
 " Stay away from bad habits
 inoremap <esc> <nop>
 
-" Quick-save
-nmap <leader>w :w<CR>
+" Source config file
+nmap <leader>src :source ~/.vimrc<CR>
 
 noremap <C-l> gt
 noremap <C-h> gT
