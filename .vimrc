@@ -39,6 +39,8 @@ Plug 'unblevable/quick-scope'
 
 Plug 'luochen1990/rainbow'
 
+Plug 'arcticicestudio/nord-vim'
+
 call plug#end()
 
 " Make backspace behave in a sane manner.
@@ -47,8 +49,20 @@ set backspace=indent,eol,start
 " Switch syntax highlighting on
 syntax enable
 
-" Use the dracula colour scheme
-" colorscheme dracula
+" Use 'true' 24-bit colours if available
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+" Make use of italic font styles in comments
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+
+" Make diff highlighting less overwhelming
+let g:nord_uniform_diff_background = 1
+
+" Use the Nord colour scheme
+colorscheme nord
 
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
@@ -76,9 +90,6 @@ set relativenumber
 " Change colour of non-current line numbers to gray
 highlight LineNr ctermfg=grey
 
-" Make colour of Popup menu text and background more legible
-highlight Pmenu ctermfg=White ctermbg=Black guibg=DarkGrey
-
 " Show cursor position
 set ruler
 
@@ -89,7 +100,7 @@ set hidden
 set list
 
 " Make tabs, trailing whitespace, and EOL charaters easy to spot
-set listchars=tab:▸\ ,trail:·,eol:¬
+set listchars=tab:\ \ ┊,trail:·,eol:¬
 
 " Don't wrap lines
 set nowrap
@@ -164,13 +175,23 @@ nmap <Leader>gd :Gvdiffsplit<CR>
 " Find out who I need to yell at
 nmap <Leader>gb :Git blame<CR>
 
+
+
+" Make use of italic font styles in comments
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+
+" Make diff highlighting less overwhelming
+let g:nord_uniform_diff_background = 1
 " Searching
 
 " Bindings for FZF-Preview Plugin
 "
 " Note: This is currently installed as a Coc Plugin.
 " Install with: `:CocInstall coc-fzf-preview`
-"
+
+let g:fzf_preview_command = 'bat --color=always --theme=TwoDark {-1}'
+
 nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
 
